@@ -1,9 +1,26 @@
-import React from 'react'
 
-function TaskFilter() {
+function TaskFilter({ filter, setFilter }) {
   return (
-    <div>TaskFilter</div>
-  )
+    <>
+      <button
+        onClick={() => setFilter("all")}
+      >
+        All
+      </button>
+
+      <button
+        onClick={() => setFilter("pending")}
+      >
+        Pending
+      </button>
+
+      <button
+        onClick={() => setFilter("completed")}
+      >
+        Completed
+      </button>
+    </>
+  );
 }
 
-export default TaskFilter
+export default TaskFilter;
