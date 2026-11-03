@@ -24,11 +24,17 @@ function toggleTask(id){
   ))
 }
 
-
+function editTask(updatedTask) {
+  setTasks(tasks.map((task) =>
+    task.id === updatedTask.id
+      ? { ...task, title: updatedTask.title, description: updatedTask.description }
+      : task
+  ));
+}
 
 
   return (
-    <TaskContext.Provider value={{tasks, setTasks,addTask,deleteTask,}}>
+    <TaskContext.Provider value={{tasks, setTasks,addTask,deleteTask,toggleTask,editTask}}>
       {children}
     </TaskContext.Provider>
   )

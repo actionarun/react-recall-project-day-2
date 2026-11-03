@@ -1,37 +1,23 @@
-
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { TaskContext } from '../context/TaskContext';
 import TaskForm from '../components/TaskForm';
-import TaskCard from '../components/TaskCard';
 import TaskFilter from '../components/TaskFilter';
+import TaskCard from '../components/TaskCard';
 
 function Tasks() {
-  const [tasks, setTasks] = useState([]);
+ const {
+  tasks,
+  addTask,
+  deleteTask,
+  toggleTask,
+  editTask
+} = useContext(TaskContext);
+
   const [filter, setFilter] = useState("all");
 
-  // Add Task
-  function addTask(task) {
-    const newTask = {
-      ...task,
-      id: Date.now(),
-      completed: false
-    };
 
-    setTasks([...tasks, newTask]);
-  }
-
-  // Delete Task
-  function deleteTask(id) {
-    setTasks(tasks.filter(task => task.id !== id));
-  }
-
-  // Toggle Completed / Pending
-  function toggleTask(id) {
-    setTasks(tasks.map(task =>
-      task.id === id
-        ? { ...task, completed: !task.completed }
-        : task
-    ));
-  }
+ 
+  
 
   // Filter Tasks
   const filteredTasks = tasks.filter(task => {
@@ -42,18 +28,29 @@ function Tasks() {
     return true;
   });
 
-  function onEdit(task) {
-    const updatedTitle = prompt("Enter new title:", task.title);
-    const updatedDescription = prompt("Enter new description:", task.description);  
+  function handleEdit(task) {
+  const updatedTitle = prompt("Enter new title:", task.title);
 
-    if (updatedTitle !== null && updatedDescription !== null) {
-      setTasks(tasks.map(t =>
-        t.id === task.id
-          ? { ...t, title: updatedTitle, description: updatedDescription }
-          : t
-      ));
-    }
+  if (updatedTitle === null) return;
+
+  const updatedDescription = prompt(
+    "Enter new description:",
+    task.description
+  );
+
+  if (updatedDescription === null) return;
+
+  if (!updatedTitle.trim() || !updatedDescription.trim()) {
+    alert("Fields cannot be empty");
+    return;
   }
+
+  editTask({
+    ...task,
+    title: updatedTitle.trim(),
+    description: updatedDescription.trim()
+  });
+}
 
   return (
     <>
@@ -75,7 +72,7 @@ function Tasks() {
             task={task}
             onDelete={deleteTask}
             onToggle={toggleTask}
-            onEdit={onEdit}
+           onEdit={handleEdit}
           />
         ))
       )}
