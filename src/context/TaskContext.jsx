@@ -1,9 +1,35 @@
-import React from 'react'
+import {createContext, useState} from 'react';
+export const TaskContext = createContext();
+export  function TaskProvider({children}) {
+  const [tasks, setTasks] = useState([]);
+  
+ function addTask(task) {
+  const newTask = {
+    ...task,
+    id: Date.now(),
+    completed: false
+  };
 
-function TaskContext() {
-  return (
-    <div>TaskContext</div>
-  )
+  setTasks((prevTask) => [...prevTask, newTask]);
+}
+function deleteTask(id) {
+  setTasks(tasks.filter((task) => task.id !== id));
 }
 
-export default TaskContext
+function toggleTask(id){
+  setTasks(tasks.map((task)=>
+    task.id ===id
+   ?{...task,completed:!task.completed}
+   :task
+  ))
+}
+
+
+
+
+  return (
+    <TaskContext.Provider value={{tasks, setTasks,addTask,deleteTask,}}>
+      {children}
+    </TaskContext.Provider>
+  )
+}

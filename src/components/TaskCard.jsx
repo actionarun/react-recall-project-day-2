@@ -1,4 +1,5 @@
 
+import {Link} from 'react-router-dom';
 function TaskCard({ task, onDelete, onToggle, onEdit }) {
   return (
     <div>
@@ -15,6 +16,10 @@ function TaskCard({ task, onDelete, onToggle, onEdit }) {
       <button onClick={() => onToggle(task.id)}>
         {task.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
       </button>
+
+      <Link to={`/tasks/${task.id}`}>
+  View Details
+</Link>
       
     </div>
   );
