@@ -53,7 +53,7 @@ function Tasks() {
 }
 
   return (
-    <>
+  <main className="page-container">
       <TaskForm onAddTask={addTask} />
 
       <TaskFilter
@@ -76,7 +76,7 @@ function Tasks() {
           />
         ))
       )}
-    </>
+    </main>
   );
 }
 

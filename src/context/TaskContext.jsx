@@ -1,8 +1,16 @@
-import {createContext, useState} from 'react';
+import {createContext, useState ,useEffect } from 'react';
 export const TaskContext = createContext();
 export  function TaskProvider({children}) {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+  const savedTasks = localStorage.getItem("tasks");
+
+  return savedTasks ? JSON.parse(savedTasks) : [];
+});
   
+  useEffect(() => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}, [tasks]);
+
  function addTask(task) {
   const newTask = {
     ...task,

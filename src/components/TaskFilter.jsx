@@ -1,7 +1,7 @@
 
 function TaskFilter({ filter, setFilter }) {
   return (
-    <>
+    <div className="task-filters">
       <button
         onClick={() => setFilter("all")}
       >
@@ -19,7 +19,7 @@ function TaskFilter({ filter, setFilter }) {
       >
         Completed
       </button>
-    </>
+    </div>
   );
 }
 

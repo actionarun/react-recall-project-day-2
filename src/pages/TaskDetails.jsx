@@ -10,7 +10,7 @@ const { tasks } = useContext(TaskContext);
 const task = tasks.find(task => task.id === Number(id));
   
   return (
-    <div>
+   <div className="details-card">
     {task ? (
       <>
         <h2>{task.title}</h2>

@@ -6,15 +6,13 @@ import { TaskContext } from '../context/TaskContext';
 function Navbar() {
   const { tasks } = useContext(TaskContext);
   return (
-    <>
-    <h1>Task Manager</h1>
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/tasks">Tasks</Link>
-      <Link to="/tasks/new">New Task</Link>
-      <p>Total Tasks: {tasks.length}</p>
-    </div>
-    </>
+   <header className="navbar">
+  <h1>Task Manager</h1>
+  <div className="nav-links">
+    {/* Existing Links */}
+    <p className="task-count">Total Tasks: {tasks.length}</p>
+  </div>
+</header>
   )
 }
 

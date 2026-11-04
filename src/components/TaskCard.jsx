@@ -2,7 +2,7 @@
 import {Link} from 'react-router-dom';
 function TaskCard({ task, onDelete, onToggle, onEdit }) {
   return (
-    <div>
+    <div className="task-card">
       <h2>{task.title}</h2>
       <p>{task.description}</p>
 

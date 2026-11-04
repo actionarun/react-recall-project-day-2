@@ -26,7 +26,7 @@ function TaskForm({ onAddTask }) {
 }
   return (
     <>
-    <form onSubmit={taskFormSubmit}>
+   <form className="task-form" onSubmit={taskFormSubmit}>
       <label htmlFor="title">Title</label>
       <input type="text" id="title" name="title" value={task.title} 
       onChange={(e) => SetTask({ ...task, title: e.target.value })  } />
